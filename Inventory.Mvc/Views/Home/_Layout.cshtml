@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <title>SEO Dream - Creative SEO HTML5 Template by TemplateMo</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="~/css/owl.css" rel="stylesheet" />
+    <link href="~/css/templatemo-seo-dream.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/css/animated.css" rel="stylesheet" />
+   
+
+    https://templatemo.com/tm-563-seo-dream
+
+    -->
+
+</head>
+<body>
+@using Application.Interfaces;
+    .Interfaces;   
+@using Domain.Models;
+    @using Microsoft.AspNetCore.Identity;
+    @inject ICurrentUser _currentUser
+    @inject UserManager<User> _usermanager
+    @{
+        var CurrentUser = await _usermanager.FindByIdAsync(_currentUser.UserId);
+    }
+
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a asp-action="Index" asp-controller="Home" class="logo">
+                            <img src=" ~ /images/logo-icon.png"/>" alt="" style="width: 158px;">
+                        </a>
+                      
+                        <ul class="nav">
+                            <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                            <li><a asp-action="Portfolia" asp-controller="Home">Portfolia</a></li>
+                            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Contact us</a>
+                            @{
+
+                                if (!User.Identity?.IsAuthenticated ?? false || CurrentUser?.Id == null)
+                                {
+                                    <li><a asp-area="Identity" asp-page="/Account/Login">Sign In</a></li>
+
+                                }
+                                else
+                                {
+
+                                    <li>
+                                        <a asp-area="Identity" asp-page="/Account/Manage/Index" class=" d-flex justify-content-evenly">
+                                            My profile
+                                            <img class="styleofProfilePicture" src="@CurrentUser?.ProfilePicture" />
+                                        </a>
+                                    </li>
+                                    <li><a asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>
+
+
+                                }
+
+                            }
+
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                  
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+    @RenderBody()
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>
+                        Copyright © 2023 SEO Dream Co., Ltd. All Rights Reserved.
+
+                        <br>Web Designed by <a rel="nofollow" href="https://templatemo.com" title="free CSS templates">TemplateMo</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  
+    <script src="~/js/animation.js"></script>
+    <script src="~/js/custom.js"></script>
+    <script src="~/js/imagesloaded.js"></script>
+    <script src="~/js/isotope.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/owl-carousel.js"></script>
+    <script src="~/js/tabs.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
